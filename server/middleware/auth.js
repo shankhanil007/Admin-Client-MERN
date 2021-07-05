@@ -1,10 +1,11 @@
 const jwt = require("jsonwebtoken");
 const config = require("config");
+const e = require("express");
 
 module.exports = function (req, res, next) {
   // Get token from header
   const token = req.header("x-auth-token");
-  console.log(token);
+
   // Check if not token
   if (!token) {
     return res.status(401).json({ msg: "No token, authorization denied" });
@@ -16,8 +17,11 @@ module.exports = function (req, res, next) {
     if ("admin" in decoded) {
       req.user = decoded.admin;
       next();
-    } else {
+    } else if ("client" in decoded) {
       req.user = decoded.client;
+      next();
+    } else {
+      req.user = decoded.user;
       next();
     }
   } catch (err) {

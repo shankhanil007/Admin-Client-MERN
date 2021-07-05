@@ -13,6 +13,8 @@ const Navbar = ({ title, icon }) => {
     // eslint-disable-next-line
   }, []);
 
+  console.log(user);
+
   const onLogout = () => {
     logout();
   };

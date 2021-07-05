@@ -29,8 +29,6 @@ const AuthState = (props) => {
   const loadUser = async () => {
     setAuthToken(localStorage.token);
 
-    console.log(localStorage.token);
-
     try {
       const res = await axios.get("http://localhost:5000/auth");
 
