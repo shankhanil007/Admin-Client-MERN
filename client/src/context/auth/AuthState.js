@@ -30,7 +30,7 @@ const AuthState = (props) => {
     setAuthToken(localStorage.token);
 
     try {
-      const res = await axios.get("http://localhost:5000/api/auth");
+      const res = await axios.get("http://localhost:5000/auth");
 
       dispatch({
         type: USER_LOADED,
@@ -41,8 +41,8 @@ const AuthState = (props) => {
     }
   };
 
-  // Register User
-  const register = async (formData) => {
+  // Register admin
+  const registerAdmin = async (formData) => {
     const config = {
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +51,36 @@ const AuthState = (props) => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/users",
+        "http://localhost:5000//register/admin",
+        formData,
+        config
+      );
+
+      dispatch({
+        type: REGISTER_SUCCESS,
+        payload: res.data,
+      });
+
+      loadUser(); // IIIIIIIIIIIIIIIIIIIIIIMMMMMMMMMMMMMMMMPPPPPPPPPPPPPPPPPPP
+    } catch (err) {
+      dispatch({
+        type: REGISTER_FAIL,
+        payload: err.response.data.msg,
+      });
+    }
+  };
+
+  // Register client
+  const registerClient = async (formData) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const res = await axios.post(
+        "http://localhost:5000//register/client",
         formData,
         config
       );
@@ -80,7 +109,7 @@ const AuthState = (props) => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth",
+        "http://localhost:5000/auth",
         formData,
         config
       );
@@ -113,7 +142,8 @@ const AuthState = (props) => {
         loading: state.loading,
         user: state.user,
         error: state.error,
-        register,
+        registerAdmin,
+        registerClient,
         loadUser,
         login,
         logout,

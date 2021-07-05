@@ -4,7 +4,8 @@ import AuthContext from "../../context/auth/authContext";
 
 const Register = (props) => {
   const authContext = useContext(AuthContext);
-  const { register, error, clearErrors, isAuthenticated } = authContext;
+  const { registerAdmin, registerClient, error, clearErrors, isAuthenticated } =
+    authContext;
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -25,6 +26,11 @@ const Register = (props) => {
   });
 
   const { name, email, password, password2 } = user;
+  const [role, setRole] = useState("");
+
+  const onChangeSetRole = (e) => {
+    setRole(e.target.value);
+  };
 
   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
@@ -33,11 +39,19 @@ const Register = (props) => {
     if (name === "" || email === "" || password === "") {
     } else if (password !== password2) {
     } else {
-      register({
-        name,
-        email,
-        password,
-      });
+      if (role.localeCompare("Admin")) {
+        registerAdmin({
+          name,
+          email,
+          password,
+        });
+      } else if (role.localeCompare("Client")) {
+        registerClient({
+          name,
+          email,
+          password,
+        });
+      }
     }
   };
 
@@ -116,6 +130,15 @@ const Register = (props) => {
             minLength="6"
           />
         </div>
+        <select
+          className="form-select"
+          aria-label="Default select example"
+          onChange={onChangeSetRole}
+          name="day"
+        >
+          <option value="Admin">Admin</option>
+          <option value="Client">Client</option>
+        </select>
         <button type="submit" className="btn btn-primary mt-3" value="Register">
           Register
         </button>
