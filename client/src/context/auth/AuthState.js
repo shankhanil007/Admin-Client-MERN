@@ -29,6 +29,8 @@ const AuthState = (props) => {
   const loadUser = async () => {
     setAuthToken(localStorage.token);
 
+    console.log(localStorage.token);
+
     try {
       const res = await axios.get("http://localhost:5000/auth");
 
@@ -51,10 +53,12 @@ const AuthState = (props) => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000//register/admin",
+        "http://localhost:5000/register/admin",
         formData,
         config
       );
+
+      console.log(res.data);
 
       dispatch({
         type: REGISTER_SUCCESS,
@@ -80,7 +84,7 @@ const AuthState = (props) => {
 
     try {
       const res = await axios.post(
-        "http://localhost:5000//register/client",
+        "http://localhost:5000/register/client",
         formData,
         config
       );

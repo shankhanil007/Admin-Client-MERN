@@ -14,9 +14,10 @@ const Client = require("../models/Client");
 // @access    Private
 router.get("/", auth, async (req, res) => {
   try {
-    const user = await Admin.findById(req.user.id).select("-password");
+    // console.log(req.user);
+    let user = await Admin.findById(req.user.id).select("-password");
     if (!user) {
-      user = await Client.findOne({ email });
+      user = await Client.findById(req.user.id).select("-password");
       return res.json(user);
     }
     return res.json(user);
@@ -73,7 +74,7 @@ router.post(
           },
           (err, token) => {
             if (err) throw err;
-            res.json({ token });
+            return res.json({ token });
           }
         );
 

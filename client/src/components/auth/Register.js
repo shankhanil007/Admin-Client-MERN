@@ -26,7 +26,7 @@ const Register = (props) => {
   });
 
   const { name, email, password, password2 } = user;
-  const [role, setRole] = useState("");
+  const [role, setRole] = useState("Admin");
 
   const onChangeSetRole = (e) => {
     setRole(e.target.value);
@@ -39,13 +39,13 @@ const Register = (props) => {
     if (name === "" || email === "" || password === "") {
     } else if (password !== password2) {
     } else {
-      if (role.localeCompare("Admin")) {
+      if (role.localeCompare("Admin") === 0) {
         registerAdmin({
           name,
           email,
           password,
         });
-      } else if (role.localeCompare("Client")) {
+      } else if (role.localeCompare("Client") === 0) {
         registerClient({
           name,
           email,
@@ -55,13 +55,13 @@ const Register = (props) => {
     }
   };
 
-  const onLoginSuccess = (res) => {
-    register({
-      name: res.profileObj.givenName.concat(res.profileObj.familyName),
-      email: res.profileObj.email,
-      password: "GooglePassword",
-    });
-  };
+  // const onLoginSuccess = (res) => {
+  //   register({
+  //     name: res.profileObj.givenName.concat(res.profileObj.familyName),
+  //     email: res.profileObj.email,
+  //     password: "GooglePassword",
+  //   });
+  // };
 
   const onLoginFailure = (res) => {
     console.log("Login Failed:", res);
@@ -143,14 +143,14 @@ const Register = (props) => {
           Register
         </button>
       </form>
-      <GoogleLogin
+      {/* <GoogleLogin
         clientId="17349852299-7ed5tgmaa6dl40p6qmoovg6pg4ar602f.apps.googleusercontent.com"
         buttonText="Sign Up with Google"
         onSuccess={onLoginSuccess}
         onFailure={onLoginFailure}
         cookiePolicy={"single_host_origin"}
         className="mt-3"
-      />
+      /> */}
     </div>
   );
 };
