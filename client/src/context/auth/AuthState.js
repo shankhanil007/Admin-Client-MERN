@@ -56,8 +56,6 @@ const AuthState = (props) => {
         config
       );
 
-      console.log(res.data);
-
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data,

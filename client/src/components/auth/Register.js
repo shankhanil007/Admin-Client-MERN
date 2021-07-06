@@ -23,14 +23,10 @@ const Register = (props) => {
     email: "",
     password: "",
     password2: "",
+    role: "",
   });
 
-  const { name, email, password, password2 } = user;
-  const [role, setRole] = useState("Admin");
-
-  const onChangeSetRole = (e) => {
-    setRole(e.target.value);
-  };
+  const { name, email, password, password2, role } = user;
 
   const onChange = (e) => setUser({ ...user, [e.target.name]: e.target.value });
 
@@ -44,12 +40,14 @@ const Register = (props) => {
           name,
           email,
           password,
+          role,
         });
       } else if (role.localeCompare("Client") === 0) {
         registerClient({
           name,
           email,
           password,
+          role,
         });
       }
     }
@@ -133,8 +131,8 @@ const Register = (props) => {
         <select
           className="form-select"
           aria-label="Default select example"
-          onChange={onChangeSetRole}
-          name="day"
+          onChange={onChange}
+          name="role"
         >
           <option value="Admin">Admin</option>
           <option value="Client">Client</option>
