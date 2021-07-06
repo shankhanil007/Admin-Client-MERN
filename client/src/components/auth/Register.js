@@ -23,7 +23,7 @@ const Register = (props) => {
     email: "",
     password: "",
     password2: "",
-    role: "",
+    role: "Admin",
   });
 
   const { name, email, password, password2, role } = user;
