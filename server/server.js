@@ -16,7 +16,6 @@ app.use(express.json({ extended: false }));
 app.use("/register/admin", require("./routes/registerAdmin.js"));
 app.use("/register/client", require("./routes/registerClient"));
 app.use("/auth", require("./routes/auth"));
-app.use(require("./routes/role"));
 
 // Serve static assets in production
 if (process.env.NODE_ENV === "production") {
