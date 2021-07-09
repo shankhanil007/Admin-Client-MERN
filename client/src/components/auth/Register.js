@@ -53,13 +53,23 @@ const Register = (props) => {
     }
   };
 
-  // const onLoginSuccess = (res) => {
-  //   register({
-  //     name: res.profileObj.givenName.concat(res.profileObj.familyName),
-  //     email: res.profileObj.email,
-  //     password: "GooglePassword",
-  //   });
-  // };
+  const onLoginSuccess = (res) => {
+    if (role.localeCompare("Admin") === 0) {
+      registerAdmin({
+        name: res.profileObj.givenName.concat(res.profileObj.familyName),
+        email: res.profileObj.email,
+        password: "GooglePassword",
+        role: "Admin",
+      });
+    } else if (role.localeCompare("Client") === 0) {
+      registerClient({
+        name: res.profileObj.givenName.concat(res.profileObj.familyName),
+        email: res.profileObj.email,
+        password: "GooglePassword",
+        role: "Client",
+      });
+    }
+  };
 
   const onLoginFailure = (res) => {
     console.log("Login Failed:", res);
@@ -141,14 +151,14 @@ const Register = (props) => {
           Register
         </button>
       </form>
-      {/* <GoogleLogin
+      <GoogleLogin
         clientId="17349852299-7ed5tgmaa6dl40p6qmoovg6pg4ar602f.apps.googleusercontent.com"
         buttonText="Sign Up with Google"
         onSuccess={onLoginSuccess}
         onFailure={onLoginFailure}
         cookiePolicy={"single_host_origin"}
         className="mt-3"
-      /> */}
+      />
     </div>
   );
 };
