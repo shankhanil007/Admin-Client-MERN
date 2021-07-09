@@ -11,9 +11,6 @@ import Alert from "./components/layout/Alerts";
 import AuthState from "./context/auth/AuthState";
 import AlertState from "./context/alert/AlertState";
 
-import Student from "./components/student/Student";
-import Teacher from "./components/teacher/Teacher";
-
 const App = () => {
   return (
     <AuthState>
@@ -26,16 +23,6 @@ const App = () => {
               <Switch>
                 <Route exact path="/register" component={Register} />
                 <Route exact path="/login" component={Login} />
-                <AdminRoute
-                  exact
-                  path="/teacher/dashboard"
-                  component={Teacher}
-                />
-                <ClientRoute
-                  exact
-                  path="/student/dashboard"
-                  component={Student}
-                />
               </Switch>
             </div>
           </Fragment>
